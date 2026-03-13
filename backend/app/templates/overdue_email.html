@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Overdue Notice</title>
+</head>
+<body style="margin:0; padding:0; background-color:#f4f6f9; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#f4f6f9; padding:30px 0;">
+    <tr>
+      <td align="center">
+        <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="background-color:#ffffff; border-radius:8px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+          
+          <!-- Header -->
+          <tr>
+            <td style="background: linear-gradient(135deg, #C0392B 0%, #E74C3C 100%); padding:30px 40px; text-align:center;">
+              <h1 style="color:#ffffff; margin:0; font-size:22px; font-weight:600;">
+                OVERDUE: IT Equipment Return Required
+              </h1>
+            </td>
+          </tr>
+
+          <!-- Urgency Banner -->
+          <tr>
+            <td style="background-color:#FFF3CD; padding:12px 40px; border-bottom:1px solid #FFEAA7;">
+              <p style="color:#856404; font-size:14px; margin:0; text-align:center; font-weight:600;">
+                Your equipment return is overdue by {{ days_overdue }} day(s). Please return immediately.
+              </p>
+            </td>
+          </tr>
+
+          <!-- Body -->
+          <tr>
+            <td style="padding:35px 40px;">
+              <p style="color:#333333; font-size:16px; margin:0 0 20px 0; line-height:1.6;">
+                Dear <strong>{{ employee_name }}</strong>,
+              </p>
+              
+              <p style="color:#555555; font-size:15px; margin:0 0 15px 0; line-height:1.6;">
+                Our records show that the following IT equipment was due for return on
+                <strong style="color:#C0392B;">{{ return_date }}</strong> and has not yet been returned.
+              </p>
+
+              <p style="color:#555555; font-size:15px; margin:0 0 25px 0; line-height:1.6;">
+                The return is now <strong style="color:#C0392B;">{{ days_overdue }} day(s) overdue</strong>.
+              </p>
+
+              <!-- Items Table -->
+              <table width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 25px 0; border-collapse:collapse;">
+                <tr style="background-color:#FDEDEC;">
+                  <th style="padding:10px 15px; text-align:left; font-size:13px; color:#555; border-bottom:2px solid #C0392B; font-weight:600;">Item</th>
+                  <th style="padding:10px 15px; text-align:center; font-size:13px; color:#555; border-bottom:2px solid #C0392B; font-weight:600;">Quantity</th>
+                </tr>
+                {% for item in items %}
+                <tr style="{% if loop.index is odd %}background-color:#ffffff;{% else %}background-color:#FEF9F8;{% endif %}">
+                  <td style="padding:10px 15px; font-size:14px; color:#333; border-bottom:1px solid #F5E0DE;">{{ item.name }}</td>
+                  <td style="padding:10px 15px; text-align:center; font-size:14px; color:#333; border-bottom:1px solid #F5E0DE;">{{ item.quantity }}</td>
+                </tr>
+                {% endfor %}
+              </table>
+
+              <!-- Action Required Box -->
+              <table width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 25px 0;">
+                <tr>
+                  <td style="background-color:#F8D7DA; border-left:4px solid #C0392B; padding:15px 20px; border-radius:0 4px 4px 0;">
+                    <p style="color:#721C24; font-size:14px; margin:0; line-height:1.5;">
+                      <strong>Action Required:</strong> Please return the above equipment to the IT department as soon as possible.
+                      Continued delays may be escalated to your department head.
+                    </p>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- CTA Button -->
+              <table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 auto;">
+                <tr>
+                  <td style="background-color:#C0392B; border-radius:6px;">
+                    <a href="{{ app_url }}" target="_blank" style="display:inline-block; padding:12px 30px; color:#ffffff; text-decoration:none; font-size:15px; font-weight:600;">
+                      View My Borrowing History
+                    </a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="background-color:#f8f9fa; padding:20px 40px; border-top:1px solid #e9ecef;">
+              <p style="color:#999999; font-size:12px; margin:0; text-align:center; line-height:1.5;">
+                This is an automated overdue notice from the IT Equipment Borrowing System.<br>
+                Please do not reply to this email. For questions, contact the IT department.
+              </p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
